@@ -1,19 +1,28 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import SpinnerModal from './src/components/spinnder-modal';
+import { useSpinnerStore } from './src/components/spinnder-modal/spinnerStore';
+import { Colors } from './src/Colors';
+import Home from './src/Screens/Home';
+import Stack from './src/Navigators/Stack';
 export default function App() {
+  const {showSpinner, hideSpinner, show } = useSpinnerStore()
+  const handleShowButtonCliclk = () => {
+    showSpinner(),
+    setTimeout(() => {
+      hideSpinner()
+    },3000 )
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack/>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: Colors.backgroundColor,
     alignItems: 'center',
     justifyContent: 'center',
   },
